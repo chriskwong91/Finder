@@ -5,6 +5,8 @@ const express = require('express');
 const app = express();
 
 app.use('/static', express.static('public'));
+app.use("/styles", express.static(__dirname + '/styles'));
+app.use("/node_modules", express.static(__dirname + '/node_modules'));
 
 app.get('/', (req, res) => {
   res.sendFile(__dirname + '/index.html');
