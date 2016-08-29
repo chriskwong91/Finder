@@ -6,6 +6,7 @@ let restaurantSchema = new Schema({
   name: String,
   city: String,
   zipcode: Number,
+  imageUrl: String,
   meta: {
     upVotes: Number,
     totalVotes: Number,
