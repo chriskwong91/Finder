@@ -6,7 +6,7 @@ class Rate extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      current: {image_url: 'http://www.greatwesternfoods.net/images/slideshow/01.jpg'},
+      current: {image_url: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRn7RQUJeMLF-yi1GlDZvdxYOOLnlnfQkDEW_hs6mcG2xudPFH5Hg'},
       query: '',
     };
     this.restaurants = [];
@@ -23,7 +23,6 @@ class Rate extends React.Component {
   makeYelpRequest(location) {
     var restaurants = this.restaurants;
     var businessess;
-    console.log('quer', this.state.query);
 
     if (this.state.query === '') {
       location = location || 94102;
@@ -51,11 +50,6 @@ class Rate extends React.Component {
     // console.log(this);
   }
 
-  search(e) {
-    console.log(e, e.target, e.value)
-
-  }
-
   handleChange(event) {
     console.log(event, event.target.value);
     this.setState({query: event.target.value});
@@ -69,24 +63,39 @@ class Rate extends React.Component {
     });
     this.restaurants.splice(random, 1);
     if (this.restaurants.length === 0) {
-      console.log('chaning locations');
+      console.log('changing locations');
       this.makeYelpRequest(94547);
     }
   }
 
+  handleRight () {
+    console.log('Feed Me!');
+    this.changePicture();
+  }
+
+  handleLeft() {
+    console.log('Garbage!');
+    this.changePicture();
+  }
+
   render() {
     return (
-      <div>
+      <div className='container text-center col-md-4 col-md-offset-4'>
         <h1>Spacing</h1>
         <form onSubmit={this.makeYelpRequest}>
           <input value={this.state.query} onChange={this.handleChange.bind(this)} type='text' placeholder='Enter Location'/>
           <button>Submit</button>
         </form>
-        <div className='container'>
-        <h1 onClick={this.makeYelpRequest}>Food</h1>
+        <div className='row vertical-center-row'>
+        <h1 onClick={this.makeYelpRequest}>Yum?</h1>
         </div>
         <div onClick={this.changePicture} className='picture'>
           <ImageViewer imageUrl={this.state.current.image_url} />
+        </div>
+        <div className='top-buffer'>
+          <button onClick={this.handleLeft.bind(this)} className="butspace btn btn-danger">Garbage</button>
+
+          <button onClick={this.handleRight.bind(this)} className='butspace btn btn-success'>Feed Me!</button>
         </div>
       </div>
     );

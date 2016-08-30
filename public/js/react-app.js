@@ -28188,7 +28188,7 @@
 	    var _this = _possibleConstructorReturn(this, (Rate.__proto__ || Object.getPrototypeOf(Rate)).call(this, props));
 	
 	    _this.state = {
-	      current: { image_url: 'http://www.greatwesternfoods.net/images/slideshow/01.jpg' },
+	      current: { image_url: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRn7RQUJeMLF-yi1GlDZvdxYOOLnlnfQkDEW_hs6mcG2xudPFH5Hg' },
 	      query: ''
 	    };
 	    _this.restaurants = [];
@@ -28212,7 +28212,6 @@
 	
 	      var restaurants = this.restaurants;
 	      var businessess;
-	      console.log('quer', this.state.query);
 	
 	      if (this.state.query === '') {
 	        location = location || 94102;
@@ -28240,11 +28239,6 @@
 	      // console.log(this);
 	    }
 	  }, {
-	    key: 'search',
-	    value: function search(e) {
-	      console.log(e, e.target, e.value);
-	    }
-	  }, {
 	    key: 'handleChange',
 	    value: function handleChange(event) {
 	      console.log(event, event.target.value);
@@ -28260,16 +28254,28 @@
 	      });
 	      this.restaurants.splice(random, 1);
 	      if (this.restaurants.length === 0) {
-	        console.log('chaning locations');
+	        console.log('changing locations');
 	        this.makeYelpRequest(94547);
 	      }
+	    }
+	  }, {
+	    key: 'handleRight',
+	    value: function handleRight() {
+	      console.log('Feed Me!');
+	      this.changePicture();
+	    }
+	  }, {
+	    key: 'handleLeft',
+	    value: function handleLeft() {
+	      console.log('Garbage!');
+	      this.changePicture();
 	    }
 	  }, {
 	    key: 'render',
 	    value: function render() {
 	      return _react2.default.createElement(
 	        'div',
-	        null,
+	        { className: 'container text-center col-md-4 col-md-offset-4' },
 	        _react2.default.createElement(
 	          'h1',
 	          null,
@@ -28287,17 +28293,31 @@
 	        ),
 	        _react2.default.createElement(
 	          'div',
-	          { className: 'container' },
+	          { className: 'row vertical-center-row' },
 	          _react2.default.createElement(
 	            'h1',
 	            { onClick: this.makeYelpRequest },
-	            'Food'
+	            'Yum?'
 	          )
 	        ),
 	        _react2.default.createElement(
 	          'div',
 	          { onClick: this.changePicture, className: 'picture' },
 	          _react2.default.createElement(_RateImageView2.default, { imageUrl: this.state.current.image_url })
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'top-buffer' },
+	          _react2.default.createElement(
+	            'button',
+	            { onClick: this.handleLeft.bind(this), className: 'butspace btn btn-danger' },
+	            'Garbage'
+	          ),
+	          _react2.default.createElement(
+	            'button',
+	            { onClick: this.handleRight.bind(this), className: 'butspace btn btn-success' },
+	            'Feed Me!'
+	          )
 	        )
 	      );
 	    }
