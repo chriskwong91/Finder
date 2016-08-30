@@ -28119,7 +28119,22 @@
 	          _react2.default.createElement(
 	            'h1',
 	            null,
-	            'Welcome'
+	            'Welcome to Finder!'
+	          ),
+	          _react2.default.createElement(
+	            'h3',
+	            null,
+	            'Match with food that looks good...'
+	          ),
+	          _react2.default.createElement('img', { className: 'mainImage', src: 'http://images1.phoenixnewtimes.com/imager/u/745xauto/8039501/phxchinese-newhongkong05-ecarpenter.jpg' })
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'container' },
+	          _react2.default.createElement(
+	            'h3',
+	            null,
+	            'Top Restaurants'
 	          )
 	        )
 	      );
@@ -28144,13 +28159,15 @@
 	  value: true
 	});
 	
-	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
-	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 	
 	var _react = __webpack_require__(/*! react */ 1);
 	
 	var _react2 = _interopRequireDefault(_react);
+	
+	var _RateImageView = __webpack_require__(/*! ./RateImageView.jsx */ 244);
+	
+	var _RateImageView2 = _interopRequireDefault(_RateImageView);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -28168,27 +28185,84 @@
 	  function Rate(props) {
 	    _classCallCheck(this, Rate);
 	
-	    return _possibleConstructorReturn(this, (Rate.__proto__ || Object.getPrototypeOf(Rate)).call(this, props));
+	    var _this = _possibleConstructorReturn(this, (Rate.__proto__ || Object.getPrototypeOf(Rate)).call(this, props));
+	
+	    _this.state = {
+	      current: { image_url: 'http://www.greatwesternfoods.net/images/slideshow/01.jpg' },
+	      query: ''
+	    };
+	    _this.restaurants = [];
+	    _this.makeYelpRequest = _this.makeYelpRequest.bind(_this);
+	    _this.changePicture = _this.changePicture.bind(_this);
+	
+	    return _this;
 	  }
 	
 	  _createClass(Rate, [{
-	    key: 'makeYelpRequest',
-	    value: function makeYelpRequest() {
+	    key: 'componentDidMount',
+	    value: function componentDidMount() {
 	      console.log('making request');
+	      this.makeYelpRequest();
+	      console.log(this.restaurants);
+	    }
+	  }, {
+	    key: 'makeYelpRequest',
+	    value: function makeYelpRequest(location) {
+	      var _this2 = this;
+	
+	      var restaurants = this.restaurants;
+	      var businessess;
+	      console.log('quer', this.state.query);
+	
+	      if (this.state.query === '') {
+	        location = location || 94102;
+	      } else {
+	        location = this.state.query;
+	      }
+	
 	      $.ajax({
 	        url: 'http://localhost:3000/yelp',
 	        type: 'GET',
 	        data: {
-	          term: 'restaurant' },
+	          term: 'restaurant',
+	          location: location },
 	        contentType: 'application/json',
 	        success: function success(data) {
-	          var restaurants = JSON.parse(data);
-	          console.log('Success Post!', restaurants, typeof restaurants === 'undefined' ? 'undefined' : _typeof(restaurants));
+	          var dat = JSON.parse(data);
+	          // console.log('Success Post!', dat);
+	          _this2.restaurants = dat.businesses;
+	          // console.log(this.restaurants);
 	        },
 	        error: function error(_error) {
 	          console.log('There was an Error:', _error);
 	        }
 	      });
+	      // console.log(this);
+	    }
+	  }, {
+	    key: 'search',
+	    value: function search(e) {
+	      console.log(e, e.target, e.value);
+	    }
+	  }, {
+	    key: 'handleChange',
+	    value: function handleChange(event) {
+	      console.log(event, event.target.value);
+	      this.setState({ query: event.target.value });
+	    }
+	  }, {
+	    key: 'changePicture',
+	    value: function changePicture() {
+	      var random = Math.floor(Math.random() * this.restaurants.length);
+	      console.log('random number', random);
+	      this.setState({
+	        current: this.restaurants[random]
+	      });
+	      this.restaurants.splice(random, 1);
+	      if (this.restaurants.length === 0) {
+	        console.log('chaning locations');
+	        this.makeYelpRequest(94547);
+	      }
 	    }
 	  }, {
 	    key: 'render',
@@ -28202,6 +28276,16 @@
 	          'Spacing'
 	        ),
 	        _react2.default.createElement(
+	          'form',
+	          { onSubmit: this.makeYelpRequest },
+	          _react2.default.createElement('input', { value: this.state.query, onChange: this.handleChange.bind(this), type: 'text', placeholder: 'Enter Location' }),
+	          _react2.default.createElement(
+	            'button',
+	            null,
+	            'Submit'
+	          )
+	        ),
+	        _react2.default.createElement(
 	          'div',
 	          { className: 'container' },
 	          _react2.default.createElement(
@@ -28209,6 +28293,11 @@
 	            { onClick: this.makeYelpRequest },
 	            'Food'
 	          )
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          { onClick: this.changePicture, className: 'picture' },
+	          _react2.default.createElement(_RateImageView2.default, { imageUrl: this.state.current.image_url })
 	        )
 	      );
 	    }
@@ -38301,6 +38390,33 @@
 	return jQuery;
 	} );
 
+
+/***/ },
+/* 244 */
+/*!*********************************************!*\
+  !*** ./client/components/RateImageView.jsx ***!
+  \*********************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _react = __webpack_require__(/*! react */ 1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var ImageViewer = function ImageViewer(_ref) {
+	  var imageUrl = _ref.imageUrl;
+	
+	  return _react2.default.createElement('img', { src: imageUrl });
+	};
+	
+	exports.default = ImageViewer;
 
 /***/ }
 /******/ ]);
