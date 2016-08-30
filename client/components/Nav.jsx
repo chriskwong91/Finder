@@ -1,29 +1,25 @@
 import React from 'react';
 import Router from 'react-router';
-import App from './App.jsx';
 import FavoriteList from './FavoriteList.jsx';
-import { DefaultRoute, Link, Route, RouteHandler } from 'react-router';
+import { Link } from 'react-router';
 
 let Nav = (props) => {
   return(
     <div>
-
+        <div className="navbar navbar-default navbar-fixed-top">
+          <div className='container'>
+          <a className="navbar-brand" href="#">Finder</a>
+          <Link to='/'><p className="navbar-brand">Home</p></Link>
+          <Link to='rate'><p className="navbar-brand">Food Swiping</p></Link>
+          <Link to='favorites'><p className="navbar-brand">My Favorites</p></Link>
+          <button type="button" className="btn btn-default navbar-btn navbar-right">Sign in</button>
+          </div>
+        </div>
     </div>
   );
 
 };
 
-      // <Link to='home'>Home</Link>
-      // <Link to='favorites'>My Favorites</Link>
-      // <RouteHandler/>
-// let routes = (
-//   <Route name='home' path='/' hander={App}>
-//     <Route name='favorites' path='/favorites' handler={FavoriteList}/>
-//   </Route>
-// );
 
-// // Router.run(routes, (handler) => {
-// //   React.render(<Handler/>, document.body);
-// // });
 
 export default Nav;

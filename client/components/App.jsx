@@ -13,33 +13,27 @@ import { Link } from 'react-router';
 class App extends React.Component {
   constructor(props) {
     super(props);
-
+    // this.state = {
+    //   currentPage: this.props.children,
+    // }
+    // this.getNav = this.getNav.bind(this);
   }
 
+  // getNav(page) {
+  //   this.setState({
+  //     currentPage : page
+  //   });
+  // }
   render() {
     return (
       <div>
-        <div id="nav">
-          {this.props.children}
-          <Link to='favorites'><button className='btn btn-success'>My Favorites</button></Link>
-          <Link to='/'>Finder</Link>
-        </div>
+        <Nav />
+        <div className='container'>{this.props.children}</div>
       </div>
     );
   }
 }
 
-// <Link to='home'>Home</Link>
-// let routes = (
-//   <Route name='ourApp' path='/' hander={require('./ourApp.jsx')}>
-//     <DefaultRoute handler={require('./App.jsx')} />
-//     <Route name='favorites' handler={FavoriteList} />
-//   </Route>
-// );
-
-// Router.run(routes, (Handler) => {
-//   React.render(<Handler/>, document.body);
-// });
 
 export default App;
 

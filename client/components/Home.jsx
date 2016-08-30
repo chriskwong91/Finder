@@ -3,7 +3,12 @@ import React from 'react';
 class Home extends React.Component {
   render() {
     return (
-      <h1>Finder</h1>
+      <div>
+        <h1>Spacing</h1>
+        <div className='container'>
+        <h1>Welcome</h1>
+        </div>
+      </div>
     );
   }
 }

@@ -61,6 +61,10 @@
 	
 	var _App2 = _interopRequireDefault(_App);
 	
+	var _Rate = __webpack_require__(/*! ./client/components/Rate.jsx */ 242);
+	
+	var _Rate2 = _interopRequireDefault(_Rate);
+	
 	var _Favorite = __webpack_require__(/*! ./client/components/Favorite.jsx */ 240);
 	
 	var _Favorite2 = _interopRequireDefault(_Favorite);
@@ -68,6 +72,10 @@
 	var _Home = __webpack_require__(/*! ./client/components/Home.jsx */ 241);
 	
 	var _Home2 = _interopRequireDefault(_Home);
+	
+	var _Nav = __webpack_require__(/*! ./client/components/Nav.jsx */ 174);
+	
+	var _Nav2 = _interopRequireDefault(_Nav);
 	
 	var _reactRouter = __webpack_require__(/*! react-router */ 175);
 	
@@ -80,7 +88,8 @@
 	    _reactRouter.Route,
 	    { path: '/', component: _App2.default },
 	    _react2.default.createElement(_reactRouter.IndexRoute, { component: _Home2.default }),
-	    _react2.default.createElement(_reactRouter.Route, { path: 'favorites', component: _Favorite2.default })
+	    _react2.default.createElement(_reactRouter.Route, { path: 'favorites', component: _Favorite2.default }),
+	    _react2.default.createElement(_reactRouter.Route, { path: 'rate', component: _Rate2.default })
 	  )
 	), document.getElementById('app'));
 
@@ -22002,7 +22011,18 @@
 	    _classCallCheck(this, App);
 	
 	    return _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this, props));
+	    // this.state = {
+	    //   currentPage: this.props.children,
+	    // }
+	    // this.getNav = this.getNav.bind(this);
 	  }
+	
+	  // getNav(page) {
+	  //   this.setState({
+	  //     currentPage : page
+	  //   });
+	  // }
+	
 	
 	  _createClass(App, [{
 	    key: 'render',
@@ -22010,24 +22030,11 @@
 	      return _react2.default.createElement(
 	        'div',
 	        null,
+	        _react2.default.createElement(_Nav2.default, null),
 	        _react2.default.createElement(
 	          'div',
-	          { id: 'nav' },
-	          this.props.children,
-	          _react2.default.createElement(
-	            _reactRouter.Link,
-	            { to: 'favorites' },
-	            _react2.default.createElement(
-	              'button',
-	              { className: 'btn btn-success' },
-	              'My Favorites'
-	            )
-	          ),
-	          _react2.default.createElement(
-	            _reactRouter.Link,
-	            { to: '/' },
-	            'Finder'
-	          )
+	          { className: 'container' },
+	          this.props.children
 	        )
 	      );
 	    }
@@ -22035,18 +22042,6 @@
 	
 	  return App;
 	}(_react2.default.Component);
-	
-	// <Link to='home'>Home</Link>
-	// let routes = (
-	//   <Route name='ourApp' path='/' hander={require('./ourApp.jsx')}>
-	//     <DefaultRoute handler={require('./App.jsx')} />
-	//     <Route name='favorites' handler={FavoriteList} />
-	//   </Route>
-	// );
-	
-	// Router.run(routes, (Handler) => {
-	//   React.render(<Handler/>, document.body);
-	// });
 	
 	exports.default = App;
 
@@ -22071,10 +22066,6 @@
 	
 	var _reactRouter2 = _interopRequireDefault(_reactRouter);
 	
-	var _App = __webpack_require__(/*! ./App.jsx */ 173);
-	
-	var _App2 = _interopRequireDefault(_App);
-	
 	var _FavoriteList = __webpack_require__(/*! ./FavoriteList.jsx */ 238);
 	
 	var _FavoriteList2 = _interopRequireDefault(_FavoriteList);
@@ -22082,21 +22073,56 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	var Nav = function Nav(props) {
-	  return _react2.default.createElement('div', null);
+	  return _react2.default.createElement(
+	    'div',
+	    null,
+	    _react2.default.createElement(
+	      'div',
+	      { className: 'navbar navbar-default navbar-fixed-top' },
+	      _react2.default.createElement(
+	        'div',
+	        { className: 'container' },
+	        _react2.default.createElement(
+	          'a',
+	          { className: 'navbar-brand', href: '#' },
+	          'Finder'
+	        ),
+	        _react2.default.createElement(
+	          _reactRouter.Link,
+	          { to: '/' },
+	          _react2.default.createElement(
+	            'p',
+	            { className: 'navbar-brand' },
+	            'Home'
+	          )
+	        ),
+	        _react2.default.createElement(
+	          _reactRouter.Link,
+	          { to: 'rate' },
+	          _react2.default.createElement(
+	            'p',
+	            { className: 'navbar-brand' },
+	            'Food Swiping'
+	          )
+	        ),
+	        _react2.default.createElement(
+	          _reactRouter.Link,
+	          { to: 'favorites' },
+	          _react2.default.createElement(
+	            'p',
+	            { className: 'navbar-brand' },
+	            'My Favorites'
+	          )
+	        ),
+	        _react2.default.createElement(
+	          'button',
+	          { type: 'button', className: 'btn btn-default navbar-btn navbar-right' },
+	          'Sign in'
+	        )
+	      )
+	    )
+	  );
 	};
-	
-	// <Link to='home'>Home</Link>
-	// <Link to='favorites'>My Favorites</Link>
-	// <RouteHandler/>
-	// let routes = (
-	//   <Route name='home' path='/' hander={App}>
-	//     <Route name='favorites' path='/favorites' handler={FavoriteList}/>
-	//   </Route>
-	// );
-	
-	// // Router.run(routes, (handler) => {
-	// //   React.render(<Handler/>, document.body);
-	// // });
 	
 	exports.default = Nav;
 
@@ -27963,7 +27989,12 @@
 	  return _react2.default.createElement(
 	    'div',
 	    null,
-	    'Welcome to the Favorite Page!'
+	    _react2.default.createElement('p', null),
+	    _react2.default.createElement(
+	      'div',
+	      null,
+	      'Welcome to the Favorite Page!'
+	    )
 	  );
 	};
 	
@@ -28010,9 +28041,22 @@
 	    key: 'render',
 	    value: function render() {
 	      return _react2.default.createElement(
-	        'h1',
+	        'div',
 	        null,
-	        'My Favorites'
+	        _react2.default.createElement(
+	          'h1',
+	          null,
+	          'Spacing'
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'container' },
+	          _react2.default.createElement(
+	            'h1',
+	            null,
+	            'My Favorites'
+	          )
+	        )
 	      );
 	    }
 	  }]);
@@ -28062,9 +28106,22 @@
 	    key: 'render',
 	    value: function render() {
 	      return _react2.default.createElement(
-	        'h1',
+	        'div',
 	        null,
-	        'Finder'
+	        _react2.default.createElement(
+	          'h1',
+	          null,
+	          'Spacing'
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'container' },
+	          _react2.default.createElement(
+	            'h1',
+	            null,
+	            'Welcome'
+	          )
+	        )
 	      );
 	    }
 	  }]);
@@ -28073,6 +28130,71 @@
 	}(_react2.default.Component);
 	
 	exports.default = Home;
+
+/***/ },
+/* 242 */
+/*!************************************!*\
+  !*** ./client/components/Rate.jsx ***!
+  \************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _react = __webpack_require__(/*! react */ 1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var Rate = function (_React$Component) {
+	  _inherits(Rate, _React$Component);
+	
+	  function Rate() {
+	    _classCallCheck(this, Rate);
+	
+	    return _possibleConstructorReturn(this, (Rate.__proto__ || Object.getPrototypeOf(Rate)).apply(this, arguments));
+	  }
+	
+	  _createClass(Rate, [{
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement(
+	        'div',
+	        null,
+	        _react2.default.createElement(
+	          'h1',
+	          null,
+	          'Spacing'
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'container' },
+	          _react2.default.createElement(
+	            'h1',
+	            null,
+	            'Food'
+	          )
+	        )
+	      );
+	    }
+	  }]);
+	
+	  return Rate;
+	}(_react2.default.Component);
+	
+	exports.default = Rate;
 
 /***/ }
 /******/ ]);
