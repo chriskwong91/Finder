@@ -1,5 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './client/components/App.jsx';
+import Favorite from './client/components/Favorite.jsx';
+import Home from './client/components/Home.jsx';
+import { Router, Route, IndexRoute, hashHistory } from 'react-router';
 
-ReactDOM.render(<App />, document.getElementById('app'));
+ReactDOM.render(
+  <Router history={hashHistory}>
+    <Route path='/' component={App}>
+      <IndexRoute component={Home}></IndexRoute>
+      <Route path='favorites' component={Favorite}></Route>
+    </Route>
+  </Router>,
+  document.getElementById('app'));

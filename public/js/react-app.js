@@ -61,9 +61,28 @@
 	
 	var _App2 = _interopRequireDefault(_App);
 	
+	var _Favorite = __webpack_require__(/*! ./client/components/Favorite.jsx */ 240);
+	
+	var _Favorite2 = _interopRequireDefault(_Favorite);
+	
+	var _Home = __webpack_require__(/*! ./client/components/Home.jsx */ 241);
+	
+	var _Home2 = _interopRequireDefault(_Home);
+	
+	var _reactRouter = __webpack_require__(/*! react-router */ 175);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	_reactDom2.default.render(_react2.default.createElement(_App2.default, null), document.getElementById('app'));
+	_reactDom2.default.render(_react2.default.createElement(
+	  _reactRouter.Router,
+	  { history: _reactRouter.hashHistory },
+	  _react2.default.createElement(
+	    _reactRouter.Route,
+	    { path: '/', component: _App2.default },
+	    _react2.default.createElement(_reactRouter.IndexRoute, { component: _Home2.default }),
+	    _react2.default.createElement(_reactRouter.Route, { path: 'favorites', component: _Favorite2.default })
+	  )
+	), document.getElementById('app'));
 
 /***/ },
 /* 1 */
@@ -21957,6 +21976,8 @@
 	
 	var _FavoriteList2 = _interopRequireDefault(_FavoriteList);
 	
+	var _reactRouter = __webpack_require__(/*! react-router */ 175);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -21964,14 +21985,15 @@
 	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	// import Router = require('react-router');
 	
-	var Router = __webpack_require__(/*! react-router */ 175);
 	
 	// import { DefaultRoute, Link, Route, RouteHandler } from 'react-router';
 	
-	var DefaultRoute = Router.DefaultRoute;
-	var Route = Router.Route;
-	var RouteHandler = Router.RouteHandler;
+	// let DefaultRoute = Router.DefaultRoute;
+	// let Route = Router.Route;
+	// let RouteHandler = Router.RouteHandler;
+	
 	
 	var App = function (_React$Component) {
 	  _inherits(App, _React$Component);
@@ -21991,17 +22013,21 @@
 	        _react2.default.createElement(
 	          'div',
 	          { id: 'nav' },
+	          this.props.children,
 	          _react2.default.createElement(
-	            Link,
-	            { to: 'home' },
-	            'Home'
-	          ),
-	          _react2.default.createElement(
-	            Link,
+	            _reactRouter.Link,
 	            { to: 'favorites' },
-	            'My Favorites'
+	            _react2.default.createElement(
+	              'button',
+	              { className: 'btn btn-success' },
+	              'My Favorites'
+	            )
 	          ),
-	          _react2.default.createElement(RouteHandler, null)
+	          _react2.default.createElement(
+	            _reactRouter.Link,
+	            { to: '/' },
+	            'Finder'
+	          )
 	        )
 	      );
 	    }
@@ -22010,16 +22036,17 @@
 	  return App;
 	}(_react2.default.Component);
 	
-	var routes = _react2.default.createElement(
-	  Route,
-	  { name: 'ourApp', path: '/', hander: __webpack_require__(/*! ./ourApp.jsx */ 239) },
-	  _react2.default.createElement(DefaultRoute, { handler: __webpack_require__(/*! ./App.jsx */ 173) }),
-	  _react2.default.createElement(Route, { name: 'favorites', handler: _FavoriteList2.default })
-	);
+	// <Link to='home'>Home</Link>
+	// let routes = (
+	//   <Route name='ourApp' path='/' hander={require('./ourApp.jsx')}>
+	//     <DefaultRoute handler={require('./App.jsx')} />
+	//     <Route name='favorites' handler={FavoriteList} />
+	//   </Route>
+	// );
 	
-	Router.run(routes, function (Handler) {
-	  _react2.default.render(_react2.default.createElement(Handler, null), document.body);
-	});
+	// Router.run(routes, (Handler) => {
+	//   React.render(<Handler/>, document.body);
+	// });
 	
 	exports.default = App;
 
@@ -27943,10 +27970,11 @@
 	exports.default = FavoriteList;
 
 /***/ },
-/* 239 */
-/*!**************************************!*\
-  !*** ./client/components/ourApp.jsx ***!
-  \**************************************/
+/* 239 */,
+/* 240 */
+/*!****************************************!*\
+  !*** ./client/components/Favorite.jsx ***!
+  \****************************************/
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -27957,33 +27985,94 @@
 	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 	
+	var _react = __webpack_require__(/*! react */ 1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 	
 	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
-	var React = __webpack_require__(/*! react */ 1);
-	var RouteHandler = React.RouteHandler;
+	var Favorite = function (_React$Component) {
+	  _inherits(Favorite, _React$Component);
 	
-	var ourApp = exports.ourApp = function (_React$Component) {
-	  _inherits(ourApp, _React$Component);
+	  function Favorite() {
+	    _classCallCheck(this, Favorite);
 	
-	  function ourApp(props) {
-	    _classCallCheck(this, ourApp);
-	
-	    return _possibleConstructorReturn(this, (ourApp.__proto__ || Object.getPrototypeOf(ourApp)).call(this, props));
+	    return _possibleConstructorReturn(this, (Favorite.__proto__ || Object.getPrototypeOf(Favorite)).apply(this, arguments));
 	  }
 	
-	  _createClass(ourApp, [{
+	  _createClass(Favorite, [{
 	    key: 'render',
 	    value: function render() {
-	      return React.createElement(RouteHandler, null);
+	      return _react2.default.createElement(
+	        'h1',
+	        null,
+	        'My Favorites'
+	      );
 	    }
 	  }]);
 	
-	  return ourApp;
-	}(React.Component);
+	  return Favorite;
+	}(_react2.default.Component);
+	
+	exports.default = Favorite;
+
+/***/ },
+/* 241 */
+/*!************************************!*\
+  !*** ./client/components/Home.jsx ***!
+  \************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _react = __webpack_require__(/*! react */ 1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var Home = function (_React$Component) {
+	  _inherits(Home, _React$Component);
+	
+	  function Home() {
+	    _classCallCheck(this, Home);
+	
+	    return _possibleConstructorReturn(this, (Home.__proto__ || Object.getPrototypeOf(Home)).apply(this, arguments));
+	  }
+	
+	  _createClass(Home, [{
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement(
+	        'h1',
+	        null,
+	        'Finder'
+	      );
+	    }
+	  }]);
+	
+	  return Home;
+	}(_react2.default.Component);
+	
+	exports.default = Home;
 
 /***/ }
 /******/ ]);
